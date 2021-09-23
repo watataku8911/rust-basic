@@ -21,6 +21,35 @@ Rust の標準にある基本的なデータ型は次のとおりです：
 - b'A' (バイト)
 - 0. (浮動小数点数)
 
+## 変数・定数(let, mut, const)
+
+変数を宣言するには let を使用しますが、Rust ではイミュータブルな(作成後に変更することができない)オブジェクトとして生成されます。
+
+```
+let n = 0;
+```
+
+**変更可能**な(ミュータブルな)変数を宣言するには **mut** を使用する必要があります。
+
+```
+let mut n = 0;
+```
+
+**定数**を定義するには **const** を用います。
+
+```
+const MAX_POINTS: u32 = 100_000;
+```
+
+## 型変換(as)
+
+暗黙の型変換は行ってくれません。**as** を用いて明示的に型変換します。
+
+```
+let x: i32 = 123;
+let y: i64 = x as i64;
+```
+
 ## 関数
 
 [参考。](https://zenn.dev/mebiusbox/books/22d4c1ed9b0003/viewer/259f24)
@@ -135,4 +164,60 @@ fn main() {
 
 ## 構造体
 
-Comming Soon ........
+[参考。](https://zenn.dev/mebiusbox/books/22d4c1ed9b0003/viewer/0e7a37)
+
+**構造体** はデータ型の要素を集めたものです．
+１つ１つの要素を **フィールド** と呼びます．
+構造体の定義は `struct` を使い，_フィールドは名前と型を指定します．_
+
+```
+struct User {
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    active: bool,
+}
+```
+
+構造体のオブジェクトを作成する場合は，各フィールドを key:value という形で束縛します．
+
+※束縛
+_let 文を使うことでオブジェクトと変数を 束縛 します．変数はそのスコープから外れたときに束縛していた所有権を放棄します．また，最初に束縛したオブジェクトの所有権は基本的に原本となり，原本および仮の所有権がすべて放棄された時にオブジェクトは破棄されます．_
+
+```
+let user1 = User {
+    email: String::from("someone@example.com"),
+    username: String::from("someusername123"),
+    active: true,
+    sign_in_count: 1,
+};
+```
+
+- メソッド
+
+**メソッド**は関数に似ていますが，構造体と関連していて， `self` を使うことで，そのメソッドを呼び出したオブジェクトを操作することが出来ます．
+メソッドの第一引数は必ず self になります．また，基本的に不変参照 (&self) か可変参照 (&mut self) になります．もちろん，可変参照のメソッドは，呼び出し元が可変の所有権を使って呼び出さなければなりません．
+メソッドは `impl` ブロックの中で，関数と同じく fn を使って定義します．
+
+```
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle { width: 30, height: 50, };
+
+    println!("The area of the rectangle is {} square pixels.", rect1.area());
+}
+```
+
+_※impl ブロックは複数定義することが出来ます．トレイトごとに実装を分けたりすることが出来ます_
+
+##
