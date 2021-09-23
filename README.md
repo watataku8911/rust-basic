@@ -3,6 +3,7 @@
 ## 基本データ型
 
 [参考。](https://zenn.dev/mebiusbox/books/22d4c1ed9b0003/viewer/fb866b)
+
 Rust の標準にある基本的なデータ型は次のとおりです：
 
 - 整数型: i8, u8, i16, u16, i32, u32, i64, u64, isize, usize
@@ -115,7 +116,8 @@ fn main() {
 
 - loop 式
 
-**無限ループ**するには loop を使います．ループから抜ける場合は break を使います． loop もまた式なので， break に返り値を指定することが出来ます．
+**無限ループするには loop を使います**
+ループから抜ける場合は break を使います． loop もまた式なので， break に返り値を指定することが出来ます．
 
 ```
 fn main() {
